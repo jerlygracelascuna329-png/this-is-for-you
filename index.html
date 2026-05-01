@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 17th Monthsary, My Love!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ffe6e6 0%, #ffb3c6 30%, #ff8fab 60%, #ff6b9d 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 3D Hearts Animation */
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            color: #ff1744;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: floatHeart linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .heart::before {
+            content: '❤️';
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* 3D Flowers */
+        .flower {
+            position: fixed;
+            font-size: 25px;
+            animation: floatFlower linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .flower::before {
+            content: '🌸';
+        }
+
+        @keyframes floatFlower {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.3);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Rose petals */
+        .rose {
+            position: fixed;
+            font-size: 18px;
+            animation: floatRose linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .rose::before {
+            content: '🌹';
+        }
+
+        @keyframes floatRose {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.4);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+            }
+            90% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(-360deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: fixed;
+            font-size: 15px;
+            animation: sparkleFloat linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .sparkle::before {
+            content: '✨';
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Main Container */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Title Section */
+        .title-section {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 2s ease-out;
+        }
+
+        .title-section h1 {
+            font-size: 3rem;
+            color: #c2185b;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.1), 0 0 20px rgba(255,23,68,0.3);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .title-section .subtitle {
+            font-size: 1.5rem;
+            color: #880e4f;
+            font-style: italic;
+        }
+
+        /* Photo Grid */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .photo-slot {
+            aspect-ratio: 1;
+            background: rgba(255,255,255,0.4);
+            border: 3px dashed #ff6b9d;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #ff6b9d;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-slot:hover {
+            transform: scale(1.05);
+            border-color: #ff1744;
+            box-shadow: 0 8px 25px rgba(255,23,68,0.3);
+        }
+
+        .photo-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 17px;
+        }
+
+        .photo-slot .placeholder {
+            position: absolute;
+            font-size: 0.9rem;
+            color: #c2185b;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Message Card */
+        .message-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 20px 0;
+            width: 100%;
+            box-shadow: 
+                0 20px 60px rgba(255, 105, 180, 0.3),
+                0 0 0 1px rgba(255,255,255,0.5) inset;
+            border: 2px solid rgba(255, 182, 193, 0.5);
+            animation: fadeInUp 2s ease-out 0.5s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,182,193,0.1) 0%, transparent 70%);
+            animation: shimmer 8s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .message-content {
+            position: relative;
+            z-index: 2;
+            line-height: 1.8;
+            color: #4a148c;
+            font-size: 1.1rem;
+        }
+
+        .message-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+            text-indent: 20px;
+        }
+
+        .message-content .highlight {
+            color: #c2185b;
+            font-weight: bold;
+        }
+
+        .message-content .ending {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #e91e63;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* Decorative corners */
+        .corner-deco {
+            position: absolute;
+            font-size: 2rem;
+            z-index: 3;
+        }
+
+        .corner-tl { top: 10px; left: 15px; }
+        .corner-tr { top: 10px; right: 15px; }
+        .corner-bl { bottom: 10px; left: 15px; }
+        .corner-br { bottom: 10px; right: 15px; }
+
+        /* Bottom Section */
+        .bottom-section {
+            text-align: center;
+            margin-top: 30px;
+            animation: fadeIn 2s ease-out 1s both;
+        }
+
+        .bottom-section .big-heart {
+            font-size: 4rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.15); }
+        }
+
+        .bottom-section .signature {
+            font-size: 1.2rem;
+            color: #880e4f;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .title-section h1 {
+                font-size: 2rem;
+            }
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .message-card {
+                padding: 25px;
+            }
+            .message-content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Elements Container -->
+    <div id="floating-elements"></div>
+
+    <div class="main-container">
+        <!-- Title -->
+        <div class="title-section">
+            <h1>💕 Happy 17th Monthsary 💕</h1>
+            <p class="subtitle">My Loveeee! ❤️</p>
+        </div>
+
+        <!-- Photo Grid - Replace # with your image paths -->
+        <div class="photo-grid">
+            <div class="photo-slot">
+               
+                <img src="img2.jpg" alt="Our Photo 1"> 
+            </div>
+            <div class="photo-slot">
+                
+                <img src="img1.jpg" alt="Our Photo 2">
+            </div>
+            <div class="photo-slot">
+              
+                <img src="img2.jpg" alt="Our Photo 3">
+            </div>
+            <div class="photo-slot">
+               
+                <img src="img3.jpg" alt="Our Photo 4">
+            </div>
+            <div class="photo-slot">
+                <img src="img1.jpg" alt="Our Photo 5"> 
+            </div>
+            <div class="photo-slot">
+                
+                <img src="img3.jpg" alt="Our Photo 6">
+            </div>
+        </div>
+
+        <!-- Message Card -->
+        <div class="message-card">
+            <div class="corner-deco corner-tl">🌸</div>
+            <div class="corner-deco corner-tr">🌸</div>
+            <div class="corner-deco corner-bl">💖</div>
+            <div class="corner-deco corner-br">💖</div>
+            
+            <div class="message-content">
+                <p>Thank you so much for everything you've given me. Thank you for always understanding me, even when I make a lot of mistakes. I know I'm not perfect, and sometimes I hurt you, but you still choose to stay with me and love me. I really appreciate that so much.</p>
+
+                <p>Thank you for your patience with me. Even when I become hard to deal with, you're still there. You never leave me, and you never change the way you treat me. <span class="highlight">I'm so lucky to have someone like you in my life.</span></p>
+
+                <p>Even when we argue or have misunderstandings, thank you for not giving up on us. Thank you for staying and fixing things with me instead of walking away. Not everyone has that kind of love, and I'm really thankful that I have you.</p>
+
+                <p>I'm really sorry for the times I hurt you. Sorry if I made you feel sad or unimportant. I didn't mean to do those things. Thank you for still giving me chances and for not leaving me even when things get hard.</p>
+
+                <p>I'm so thankful that you are my partner. I'm happy that it's you. I hope we will last longer and stay strong together. I promise that you're the only one for me. <span class="highlight">Ikaw ra gyud.</span> I will stay with you and choose you every day.</p>
+
+                <p>Also, I'm sorry for the nights when I fall asleep without talking to you. I know that matters, and I'm really sorry if it hurt you. I didn't mean it, I just get sleepy sometimes, but I'll try my best to do better.</p>
+
+                <p>Thank you for always being there for me, for loving me, and for taking care of me. You make me happy, and I'm really grateful for you.</p>
+
+                <p>I'm excited for more months and years with you. I hope we can make more memories together and stay strong no matter what happens.</p>
+
+                <p class="ending">
+                    Once again, Happy 17th Monthsary, my loveeee! ❤️<br>
+                    I love you so much, always. 💖
+                </p>
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="bottom-section">
+            <div class="big-heart">❤️</div>
+            <p class="signature">Forever Yours 💕</p>
+        </div>
+    </div>
+
+    <script>
+        // Create floating elements
+        function createFloatingElements() {
+            const container = document.getElementById('floating-elements');
+            const elements = [
+                { class: 'heart', count: 25 },
+                { class: 'flower', count: 15 },
+                { class: 'rose', count: 10 },
+                { class: 'sparkle', count: 12 }
+            ];
+
+            elements.forEach(type => {
+                for (let i = 0; i < type.count; i++) {
+                    const el = document.createElement('div');
+                    el.className = type.class;
+                    el.style.left = Math.random() * 100 + 'vw';
+                    el.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                    el.style.animationDelay = (Math.random() * 15) + 's';
+                    el.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    el.style.opacity = Math.random() * 0.5 + 0.3;
+                    container.appendChild(el);
+                }
+            });
+        }
+
+        // Add 3D perspective effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const hearts = document.querySelectorAll('.heart, .flower, .rose');
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            
+            hearts.forEach((heart, index) => {
+                const speed = (index % 5 + 1) * 0.5;
+                heart.style.transform += ` translate3d(${x * speed}px, ${y * speed}px, 0)`;
+            });
+        });
+
+        // Initialize
+        createFloatingElements();
+
+        // Add gentle floating to photo slots
+        document.querySelectorAll('.photo-slot').forEach((slot, index) => {
+            slot.style.animation = `float ${3 + index * 0.5}s ease-in-out infinite`;
+            slot.style.animationDelay = `${index * 0.3}s`;
+        });
+
+        // Add float animation dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
